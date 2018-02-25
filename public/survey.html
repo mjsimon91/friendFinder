@@ -11,16 +11,109 @@
     </head>
 
     <body>
-      <div class="container">
+      <!-- Adding a nav header -->
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Find a new friend</a>
+        </div>
+      </nav>
+
+      <!-- Placing the form on the page with 10 questions -->
+      <div class="container friendSurvey">
         <div class="row">
-          <div class="col s12"></div>
-            <h1>Friend Finder</h1>
+          <form class="col s12">
+            <div class="row">
+
+              <!-- Add your name -->
+              <div class="input-field col s6">
+                <input placeholder="First Name" id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input placeholder="Last Name"id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+
+            <!-- Add in image url -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="URL for your profile image" id="imageURL" type="url" class="validate">
+                <label for="password">Image URL</label>
+              </div>
+            </div>
+
+            <!-- Answer the questions in order to find a match -->
+
+            <!-- Question One -->
+            <p class="range-field">
+              <label for="textarea1">Question One</label>
+              <input type="range" id="questionOne" min="0" max="5" />
+            </p>
+
+            <!-- Question Two -->
+            <p class="range-field">
+              <label for="textarea1">Question Two</label>
+              <input type="range" id="questionTwo" min="0" max="5" />
+            </p>
+
+            <!-- Question Three -->
+            <p class="range-field">
+              <label for="textarea1">Question Three</label>
+              <input type="range" id="questionThree" min="0" max="5" />
+            </p>
+
+            <!-- Question Four -->
+            <p class="range-field">
+              <label for="textarea1">Question Four</label>
+              <input type="range" id="questionFour" min="0" max="5" />
+            </p>
+
+            <!-- Question Five -->
+            <p class="range-field">
+              <label for="textarea1">Question Five</label>
+              <input type="range" id="questionFive" min="0" max="5" />
+            </p>
+
+            <!-- Question Six -->
+            <p class="range-field">
+              <label for="textarea1">Question Six</label>
+              <input type="range" id="questionSix" min="0" max="5" />
+            </p>
+
+            <!-- Question Seven -->
+            <p class="range-field">
+              <label for="textarea1">Question Seven</label>
+              <input type="range" id="questionSeven" min="0" max="5" />
+            </p>
+
+            <!-- Question Eight -->
+            <p class="range-field">
+              <label for="textarea1">Question Eight</label>
+              <input type="range" id="questionEight" min="0" max="5" />
+            </p>
+
+            <!-- Question Nine -->
+            <p class="range-field">
+              <label for="textarea1">Question Nine</label>
+              <input type="range" id="questionNine" min="0" max="5" />
+            </p>
+
+            <!-- Question Ten -->
+            <p class="range-field">
+              <label for="textarea1">Question Ten</label>
+              <input type="range" id="questionTen" min="0" max="5" />
+            </p>
+
+            <!-- Adding a submit Button -->
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+          </form>
         </div>
       </div>
     </body>
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     </body>
   </html>
