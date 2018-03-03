@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 //require the html files to display the website and pass the app argument
 require('./routing/htmlRoutes.js')(app);
-// require('./routing/apiRoutes.js')(app);
+require('./routing/apiRoutes.js')(app);
 
 //Start Server for Listening
 app.listen(PORT, function() {
