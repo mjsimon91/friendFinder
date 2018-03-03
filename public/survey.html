@@ -106,7 +106,7 @@
             </p>
 
             <!-- Adding a submit Button -->
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -115,5 +115,48 @@
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+      <!-- Adding my javascript to submit the values -->
+      <script type="text/javascript">
+
+      $('#submit').on('click',function(event){
+        //prevent the page from refreshing
+        event.preventDefault();
+        //Store all values
+        firstName = $('#first_name').val().trim();
+        lastName = $('#last_name').val().trim();
+        imageURL = $('#imageURL').val().trim();
+        questionOne = parseInt($('#questionOne').val().trim());
+        questionTwo = parseInt($('#questionTwo').val().trim());
+        questionThree = parseInt($('#questionThree').val().trim());
+        questionFour = parseInt($('#questionFour').val().trim());
+        questionFive = parseInt($('#questionFive').val().trim());
+        questionSix = parseInt($('#questionSix').val().trim());
+        questionSeven = parseInt($('#questionSeven').val().trim());
+        questionEight = parseInt($('#questionEight').val().trim());
+        questionNine = parseInt($('#questionNine').val().trim());
+        questionTen = parseInt($('#questionTen').val().trim());
+        //Creating an object for each friendSurvey
+        var newFriend = {
+          firstName: firstName,
+          lastName: lastName,
+          imageURL: imageURL,
+          questionOne: questionOne,
+          questionTwo: questionTwo,
+          questionThree: questionThree,
+          questionFour: questionFour,
+          questionFive: questionFive,
+          questionSix: questionSix,
+          questionSeven: questionSeven,
+          questionEight: questionEight,
+          questionNine: questionNine,
+          questionTen: questionTen,
+          totalValue: questionOne + questionTwo + questionThree + questionFour + questionFive + questionSix + questionSeven + questionEight + questionNine + questionTen
+        }
+        console.log(newFriend);
+      })
+
+
+      </script>
     </body>
   </html>
