@@ -2,7 +2,7 @@
 var friends = [{
     firstName: 'Mike',
     lastName: 'Smith',
-    imageURL: 'www.google.com',
+    imageURL: 'https://www.w3schools.com/images/picture.jpg',
     questionOne: 1,
     questionTwo: 3,
     questionThree: 5,

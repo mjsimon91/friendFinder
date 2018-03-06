@@ -10,80 +10,74 @@ module.exports = function(app){
     
     //get the value of the user input
     var friendInput = req.body;
-    var userResponseScore = friendData.totalValue;
-    var matchName = '';
-    var matchImage = '';
-
-
-    function potentialFriend (firstName, lastName, profileImage){
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.profileImage = profileImage;
-      scoreDiff = [];
-      totalScoreDiff = 0;
-    }
-
-    potentialFriend.prototype.diffArray = function(){
-      //Loop through each friend to find the different scores for each response
-      for (let i = 0; i < friendData.length; i++) {
-        //go through each question and get the score difference
-        var questionOneDiff = parseInt(Math.abs(req.body.questionOne - friendData[i].questionOne));
-        var questionTwoDiff = parseInt(Math.abs(req.body.questionTwo - friendData[i].questionTwo));
-        var questionThreeDiff = parseInt(Math.abs(req.body.questionThree - friendData[i].questionThree));
-        var questionFourDiff = parseInt(Math.abs(req.body.questionFour - friendData[i].questionFour));
-        var questionFiveDiff = parseInt(Math.abs(req.body.questionFive - friendData[i].questionFive));
-        var questionSixDiff = parseInt(Math.abs(req.body.questionSix - friendData[i].questionSix));
-        var questionSevenDiff = parseInt(Math.abs(req.body.questionSeven - friendData[i].questionSeven));
-        var questionEightDiff = parseInt(Math.abs(req.body.questionEight - friendData[i].questionEight));
-        var questionNineDiff = parseInt(Math.abs(req.body.questionNine - friendData[i].questionNine));
-        var questionTenDiff = parseInt(Math.abs(req.body.questionTen - friendData[i].questionTen));
-        
-        //Push all the differential values to the scoreDiff array
-        scoreDiff.push(questionOneDiff);
-        scoreDiff.push(questionTwoDiff);
-        scoreDiff.push(questionThreeDiff);
-        scoreDiff.push(questionThreeDiff);
-        scoreDiff.push(questionFourDiff);
-        scoreDiff.push(questionFiveDiff);
-        scoreDiff.push(questionSixDiff);
-        scoreDiff.push(questionSevenDiff);
-        scoreDiff.push(questionEightDiff);
-        scoreDiff.push(questionNineDiff);
-        scoreDiff.push(questionTenDiff);
-
-        //add the different score to an array using reduce
-        totalScoreDiff = scoreDiff.reduce(function(curVal,amount){
-          return curVal + amount
-        })
-        //find the person with the lowest differential value
-      }
+    
+    //Create an object for the best friend and provide an arbitrary default value to compare against
+    var bestFriend = {
+      matchFirstName: '',
+      matchLastName: '',
+      matchImage: '',
+      bestfriendDiff: 1000
     }
     
-    for (let j = 0; j < friendData.length; j++) {
-      var friends = new potentialFriend(friendData[j].firstName, friendData[j].lastName, friendData[j].imageURL)
-      friends.diffArray(); 
-      console.log('Score Array ' +scoreDiff);
-      console.log('Total Score ' + totalScoreDiff);
+    //Creating an array to push all of the difference values
+    scoreDifferential = [];
+    
+
+
+    for (let i = 0; i < friendData.length; i++) {
+      //go through each question and get the score difference
+      var questionOneDiff = parseInt(Math.abs(req.body.questionOne - friendData[i].questionOne));
+      var questionTwoDiff = parseInt(Math.abs(req.body.questionTwo - friendData[i].questionTwo));
+      var questionThreeDiff = parseInt(Math.abs(req.body.questionThree - friendData[i].questionThree));
+      var questionFourDiff = parseInt(Math.abs(req.body.questionFour - friendData[i].questionFour));
+      var questionFiveDiff = parseInt(Math.abs(req.body.questionFive - friendData[i].questionFive));
+      var questionSixDiff = parseInt(Math.abs(req.body.questionSix - friendData[i].questionSix));
+      var questionSevenDiff = parseInt(Math.abs(req.body.questionSeven - friendData[i].questionSeven));
+      var questionEightDiff = parseInt(Math.abs(req.body.questionEight - friendData[i].questionEight));
+      var questionNineDiff = parseInt(Math.abs(req.body.questionNine - friendData[i].questionNine));
+      var questionTenDiff = parseInt(Math.abs(req.body.questionTen - friendData[i].questionTen));
       
+      //Push all the differential values to the scoreDiff array
+      scoreDifferential.push(questionOneDiff);
+      scoreDifferential.push(questionTwoDiff);
+      scoreDifferential.push(questionThreeDiff);
+      scoreDifferential.push(questionThreeDiff);
+      scoreDifferential.push(questionFourDiff);
+      scoreDifferential.push(questionFiveDiff);
+      scoreDifferential.push(questionSixDiff);
+      scoreDifferential.push(questionSevenDiff);
+      scoreDifferential.push(questionEightDiff);
+      scoreDifferential.push(questionNineDiff);
+      scoreDifferential.push(questionTenDiff);
+
+      //add the different score to an array using reduce
+      var totalScoreDiff = scoreDifferential.reduce(function(curVal,amount){
+        return curVal + amount
+      })
+
+      console.log('totalScoreDiff ' + totalScoreDiff);
+
+      //If the current score is less then the current match, then we have a new best friend!
+      if (totalScoreDiff < bestFriend.bestfriendDiff){
+        bestFriend.matchFirstName = friendData[i].firstName;
+        bestFriend.matchLastName = friendData[i].lastName;
+        bestFriend.matchImage = friendData[i].imageURL;
+        bestFriend.bestfriendDiff = totalScoreDiff;
+      }
     }
 
-    friendData.push(friendInput)
+    console.log(bestFriend);
+    
 
-    //Loop through each object to find the minimum value in the arrays
-    for (i=0; i < friendData.length; i++){
-      //Take the totalValue that was just added and compare it to each object in the friendData array 
-      //Create an object of each item in the data array including the difference as a key/value pair
-        //Use math.abs to find the absolute value for this value
-        //Use math.min to find the object that has the lowest value
-        //Pass this value back to the ui
+    //Return the best match
+    res.json(bestFriend)
 
-    }
-
-    //Loop through each value in the array and find the value closest to the newFriend.totalValue
+    //Push the new entry to the "database"
+    friendData.push(friendInput);
   });
+
 // Creating our API in order to find the closest friend
   app.get('/api/newFriend', function(req, res){
     res.json(friendData);
   });
-};
-
+}
