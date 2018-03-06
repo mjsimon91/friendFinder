@@ -75,9 +75,4 @@ module.exports = function(app){
     //Push the new entry to the "database"
     friendData.push(friendInput);
   });
-
-// Creating our API in order to find the closest friend
-  app.get('/api/newFriend', function(req, res){
-    res.json(friendData);
-  });
 }
